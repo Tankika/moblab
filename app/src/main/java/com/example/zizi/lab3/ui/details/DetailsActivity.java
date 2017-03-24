@@ -32,4 +32,9 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
         super.onStop();
         detailsPresenter.detachScreen();
     }
+    
+    @Override
+    void loadCard(Object card) {
+        throw new UnsupportedOperationException();
+    }
 }
