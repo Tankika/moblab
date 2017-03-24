@@ -7,6 +7,8 @@ import android.widget.Toast;
 import com.example.zizi.lab3.MobSoftApplication;
 import com.example.zizi.lab3.R;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
@@ -34,8 +36,9 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         mainPresenter.detachScreen();
     }
 
+
     @Override
-    public void showMessage(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    public void showCards(List<?> cards) {
+        Toast.makeText(this, cards.size(), Toast.LENGTH_SHORT).show();
     }
 }

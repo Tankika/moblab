@@ -1,5 +1,7 @@
 package com.example.zizi.lab3.ui.main;
 
+import java.util.List;
+
 public interface MainScreen {
-    void showMessage(String text);
+    void showCards(List<?> cards);
 }
