@@ -34,7 +34,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
     }
     
     @Override
-    void loadCard(Object card) {
+    public void loadCard(Object card) {
         throw new UnsupportedOperationException();
     }
 }
