@@ -2,9 +2,12 @@ package com.example.zizi.lab3.ui.details;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.zizi.lab3.MobSoftApplication;
 import com.example.zizi.lab3.R;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -36,5 +39,10 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
     @Override
     public void loadCard(Object card) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
