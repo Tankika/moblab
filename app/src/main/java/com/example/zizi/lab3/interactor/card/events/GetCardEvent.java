@@ -6,7 +6,6 @@ import com.example.zizi.lab3.model.Card;
 public class GetCardEvent {
     private int code;
     private Card card;
-    private String initiatorMethod;
     private Throwable throwable;
 
     public GetCardEvent() {
@@ -26,14 +25,6 @@ public class GetCardEvent {
 
     public void setCard(Card card) {
         this.card = card;
-    }
-
-    public String getInitiatorMethod() {
-        return initiatorMethod;
-    }
-
-    public void setInitiatorMethod(String initiatorMethod) {
-        this.initiatorMethod = initiatorMethod;
     }
 
     public Throwable getThrowable() {

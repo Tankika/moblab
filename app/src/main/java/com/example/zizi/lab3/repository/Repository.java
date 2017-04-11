@@ -16,9 +16,9 @@ public interface Repository {
 
     List<Card> getCards();
 
-    void saveCard(Card card);
+    void addCard(Card card);
 
-    void updateCards(List<Card> cards);
+    void updateCard(Card card);
 
     void removeFavourite(Card card);
 

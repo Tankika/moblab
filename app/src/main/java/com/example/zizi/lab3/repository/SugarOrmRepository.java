@@ -33,19 +33,17 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public void saveCard(Card card) {
+    public void addCard(Card card) {
         SugarRecord.saveInTx(card);
     }
 
     @Override
-    public void updateCards(List<Card> cards) {
-        List<Card> storedCards = getCards();
-        List<Card> toUpdate = new ArrayList<>(storedCards.size());
+    public void updateCard(Card card) {
+        List<Card> storedCards = getCards(),
+                toUpdate = new ArrayList<>(storedCards.size());
         for (Card favourite : storedCards) {
-            for (Card card : cards) {
-                if (card.getId().equals(favourite.getId())) {
-                    toUpdate.add(card);
-                }
+            if (card.getId().equals(favourite.getId())) {
+                toUpdate.add(card);
             }
         }
         SugarRecord.saveInTx(toUpdate);

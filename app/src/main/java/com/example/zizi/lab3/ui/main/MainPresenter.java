@@ -5,6 +5,8 @@ import android.util.Log;
 import com.example.zizi.lab3.MobSoftApplication;
 import com.example.zizi.lab3.interactor.card.CardsInteractor;
 import com.example.zizi.lab3.interactor.card.events.GetCardsEvent;
+import com.example.zizi.lab3.interactor.card.events.RemoveCardEvent;
+import com.example.zizi.lab3.model.Card;
 import com.example.zizi.lab3.ui.Presenter;
 
 import java.util.concurrent.Executor;
@@ -48,18 +50,34 @@ public class MainPresenter extends Presenter<MainScreen> {
         });
     }
 
-    // TODO merge favourites with cards fetched from backend
+    public void deleteCard(final Card card) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                cardsInteractor.removeCard(card);
+            }
+        });
+    }
+
     public void onEventMainThread(GetCardsEvent event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
-            if (screen != null) {
-                screen.showMessage("error");
-            }
             Log.e("Networking", "Error reading favourites", event.getThrowable());
+
+            screen.showMessage("error");
         } else {
-            if (screen != null) {
-                screen.showCards(event.getCards());
-            }
+            screen.showCards(event.getCards());
+        }
+    }
+
+    public void onEventMainThread(RemoveCardEvent event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            Log.e("Networking", "Error reading favourites", event.getThrowable());
+
+            screen.showMessage("error");
+        } else {
+            screen.showCards(event.getCards());
         }
     }
 }

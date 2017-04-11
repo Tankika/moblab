@@ -3,14 +3,12 @@ package com.example.zizi.lab3.interactor.card.events;
 
 import com.example.zizi.lab3.model.Card;
 
-import java.util.List;
-
-public class UpdateCardsEvent {
+public class GetEditableCardEvent {
     private int code;
-    private List<Card> cards;
+    private Object card;
     private Throwable throwable;
 
-    public UpdateCardsEvent() {
+    public GetEditableCardEvent() {
     }
 
     public int getCode() {
@@ -21,12 +19,12 @@ public class UpdateCardsEvent {
         this.code = code;
     }
 
-    public List<Card> getCards() {
-        return cards;
+    public Object getCard() {
+        return card;
     }
 
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
+    public void setCard(Object card) {
+        this.card = card;
     }
 
     public Throwable getThrowable() {

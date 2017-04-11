@@ -2,12 +2,12 @@ package com.example.zizi.lab3.interactor.card;
 
 
 import com.example.zizi.lab3.MobSoftApplication;
-import com.example.zizi.lab3.MobSoftApplicationComponent;
 import com.example.zizi.lab3.interactor.card.events.GetCardEvent;
 import com.example.zizi.lab3.interactor.card.events.GetCardsEvent;
+import com.example.zizi.lab3.interactor.card.events.GetEditableCardEvent;
 import com.example.zizi.lab3.interactor.card.events.RemoveCardEvent;
 import com.example.zizi.lab3.interactor.card.events.SaveCardEvent;
-import com.example.zizi.lab3.interactor.card.events.UpdateCardsEvent;
+import com.example.zizi.lab3.interactor.card.events.UpdateFavouriteCardEvent;
 import com.example.zizi.lab3.model.Card;
 import com.example.zizi.lab3.repository.Repository;
 
@@ -28,11 +28,11 @@ public class CardsInteractor {
         MobSoftApplication.injector.inject(this);
     }
 
-    public void getCard(long cardId, String initiatorMethod) {
+    public void getCard(long cardId) {
         GetCardEvent event = new GetCardEvent();
-        event.setInitiatorMethod(initiatorMethod);
         try {
             Card card = repository.getCard(cardId);
+            // TODO fetch from backend and update the data in local db
             event.setCard(card);
             bus.post(event);
         } catch (Exception e) {
@@ -41,6 +41,7 @@ public class CardsInteractor {
         }
     }
 
+    // TODO merge favourites with cards fetched from backend
     public void getCards() {
         GetCardsEvent event = new GetCardsEvent();
         try {
@@ -53,11 +54,10 @@ public class CardsInteractor {
         }
     }
 
-    public void saveCard(Card card) {
-        SaveCardEvent event = new SaveCardEvent();
-        event.setCard(card);
+    public void getEditableCard(long cardId) {
+        GetEditableCardEvent event = new GetEditableCardEvent();
         try {
-            repository.saveCard(card);
+            // TODO get from backend
             bus.post(event);
         } catch (Exception e) {
             event.setThrowable(e);
@@ -65,11 +65,40 @@ public class CardsInteractor {
         }
     }
 
-    public void updateCards(List<Card> cards) {
-        UpdateCardsEvent event = new UpdateCardsEvent();
-        event.setCards(cards);
+    public void saveCard(Card card) {
+        SaveCardEvent event = new SaveCardEvent();
+        event.setCard(card);
         try {
-            repository.updateCards(cards);
+            // TODO transaction?
+            if(card.getId() != null) {
+                // TODO call backend update
+                if(repository.isInDB(card)) {
+                    repository.updateCard(card);
+                }
+            } else {
+                // TODO call backend insert
+            }
+            bus.post(event);
+        } catch (Exception e) {
+            event.setThrowable(e);
+            bus.post(event);
+        }
+    }
+
+    public void updateFavouriteCard(Card card) {
+        UpdateFavouriteCardEvent event = new UpdateFavouriteCardEvent();
+        event.setCard(card);
+        try {
+            if(card.isFavourite() || card.getComment() != null && !card.getComment().isEmpty()) {
+                if(repository.isInDB(card)) {
+                    repository.updateCard(card);
+                } else {
+                    repository.addCard(card);
+                }
+            } else {
+                repository.removeFavourite(card);
+            }
+
             bus.post(event);
         } catch (Exception e) {
             event.setThrowable(e);
@@ -79,9 +108,11 @@ public class CardsInteractor {
 
     public void removeCard(Card card) {
         RemoveCardEvent event = new RemoveCardEvent();
-        event.setCard(card);
         try {
+            // TODO transaction?
+            // TODO call backend delete
             repository.removeFavourite(card);
+            // TODO update cards list event.setCards();
             bus.post(event);
         } catch (Exception e) {
             event.setThrowable(e);

@@ -5,12 +5,12 @@ import com.example.zizi.lab3.model.Card;
 
 import java.util.List;
 
-public class RemoveCardEvent {
+public class UpdateFavouriteCardEvent {
     private int code;
-    private List<Card> cards;
+    private Card card;
     private Throwable throwable;
 
-    public RemoveCardEvent() {
+    public UpdateFavouriteCardEvent() {
     }
 
     public int getCode() {
@@ -21,12 +21,12 @@ public class RemoveCardEvent {
         this.code = code;
     }
 
-    public List<Card> getCards() {
-        return cards;
+    public Card getCard() {
+        return card;
     }
 
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
+    public void setCard(Card card) {
+        this.card = card;
     }
 
     public Throwable getThrowable() {

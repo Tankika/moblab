@@ -44,18 +44,16 @@ public class MemoryRepository implements Repository {
     }
 
     @Override
-    public void saveCard(Card card) {
+    public void addCard(Card card) {
         cards.add(card);
     }
 
     @Override
-    public void updateCards(List<Card> cards) {
+    public void updateCard(Card card) {
         for (int i = 0; i < this.cards.size(); i++) {
             Card storedCard = this.cards.get(i);
-            for (Card card : cards) {
-                if (card.getId().equals(storedCard.getId())) {
-                    this.cards.set(i, card);
-                }
+            if (card.getId().equals(storedCard.getId())) {
+                this.cards.set(i, card);
             }
         }
     }

@@ -7,6 +7,7 @@ import com.example.zizi.lab3.ui.UIModule;
 import com.example.zizi.lab3.ui.details.DetailsActivity;
 import com.example.zizi.lab3.ui.details.DetailsPresenter;
 import com.example.zizi.lab3.ui.editor.EditorActivity;
+import com.example.zizi.lab3.ui.editor.EditorPresenter;
 import com.example.zizi.lab3.ui.main.MainActivity;
 import com.example.zizi.lab3.ui.main.MainPresenter;
 
@@ -20,6 +21,8 @@ public interface MobSoftApplicationComponent {
     void inject(MainPresenter mainPresenter);
 
     void inject(MainActivity mainActivity);
+
+    void inject(EditorPresenter editorPresenter);
 
     void inject(EditorActivity editorActivity);
 

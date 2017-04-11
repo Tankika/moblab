@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.example.zizi.lab3.MobSoftApplication;
 import com.example.zizi.lab3.R;
+import com.example.zizi.lab3.model.Card;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
     }
     
     @Override
-    public void loadCard(Object card) {
+    public void loadCard(Card card) {
         throw new UnsupportedOperationException();
     }
 
