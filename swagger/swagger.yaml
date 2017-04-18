@@ -23,7 +23,7 @@ paths:
         - Cards
       responses:
         200:
-          description: An array of products
+          description: An array of cards
           schema:
             type: array
             items:
@@ -48,9 +48,55 @@ paths:
           format: double
       responses:
         200:
-          description: An array of products
+          description: A card with the requested id
           schema:
             $ref: '#/definitions/Card'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Card
+      description: |
+        Updates a card in the system.
+      tags:
+        - Cards
+      parameters: 
+        - name: id
+          in: path
+          description: Id of the card to update
+          required: true
+          type: number
+          format: double
+        - name: card
+          in: body
+          description: Card object to update in the system
+          required: true
+          schema:
+            $ref: '#/definitions/Card'
+      responses:
+        200:
+          description: Empty response, success represented with return code
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Card
+      description: |
+        Removes a card from the system.
+      tags:
+        - Cards
+      parameters: 
+        - name: id
+          in: path
+          description: Id of the card to delete
+          required: true
+          type: number
+          format: double
+      responses:
+        200:
+          description: Empty response, success represented with return code
         default:
           description: Unexpected error
           schema:
