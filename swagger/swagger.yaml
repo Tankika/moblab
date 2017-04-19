@@ -32,6 +32,26 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+    post:
+      summary: Card
+      description:
+        Inserts a card to the system.
+      tags:
+        - Cards
+      parameters:
+        - name: card
+          in: body
+          description: Card object to update in the system
+          required: true
+          schema:
+            $ref: '#/definitions/Card'
+      responses:
+        200:
+          description: Empty response, success represented with return code
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
   /card/{id}:
     get:
       summary: Card
@@ -105,21 +125,25 @@ definitions:
   Card:
     type: object
     properties:
-      product_id:
+      id:
+        type: number
+        format: double
+        description: Unique identifier
+      name:
         type: string
-        description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
-      description:
-        type: string
-        description: Description of product.
-      display_name:
-        type: string
-        description: Display name of product.
-      capacity:
-        type: string
-        description: Capacity of product. For example, 4 people.
-      image:
-        type: string
-        description: Image URL representing the product.
+        description: Unique identifier
+      mana:
+        type: number
+        format: int32
+        description: Unique identifier
+      attack:
+        type: number
+        format: int32
+        description: Unique identifier
+      defense:
+        type: number
+        format: int32
+        description: Unique identifier
   Error:
     type: object
     properties:
@@ -127,6 +151,4 @@ definitions:
         type: integer
         format: int32
       message:
-        type: string
-      fields:
         type: string
