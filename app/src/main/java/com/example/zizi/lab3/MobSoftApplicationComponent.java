@@ -2,6 +2,7 @@ package com.example.zizi.lab3;
 
 import com.example.zizi.lab3.interactor.InteractorModule;
 import com.example.zizi.lab3.interactor.card.CardsInteractor;
+import com.example.zizi.lab3.network.NetworkModule;
 import com.example.zizi.lab3.repository.RepositoryModule;
 import com.example.zizi.lab3.ui.UIModule;
 import com.example.zizi.lab3.ui.details.DetailsActivity;
@@ -16,7 +17,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class})
+@Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class, NetworkModule.class})
 public interface MobSoftApplicationComponent {
     void inject(MainPresenter mainPresenter);
 
@@ -31,4 +32,6 @@ public interface MobSoftApplicationComponent {
     void inject(DetailsActivity detailsActivity);
 
     void inject(CardsInteractor cardsInteractor);
+
+    void inject(MobSoftApplication mobSoftApplication);
 }
