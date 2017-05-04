@@ -17,6 +17,8 @@ import de.greenrobot.event.EventBus;
 
 public class EditorPresenter extends Presenter<EditorScreen> {
 
+    private Long cardId;
+
     @Inject
     CardsInteractor cardsInteractor;
 
@@ -49,6 +51,7 @@ public class EditorPresenter extends Presenter<EditorScreen> {
     }
 
     public void saveCard(final Card card) {
+        card.setId(cardId);
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -65,9 +68,11 @@ public class EditorPresenter extends Presenter<EditorScreen> {
             screen.showMessage("error");
         } else {
             if(event.getCard() == null) {
-                screen.loadCard(new Object());
+                screen.loadCard(new Card());
+                cardId = null;
             } else {
                 screen.loadCard(event.getCard());
+                cardId = event.getCard().getId();
             }
         }
     }

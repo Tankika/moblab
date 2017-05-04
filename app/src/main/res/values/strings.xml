@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Lab3</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main">Kártya nyílvántartó</string>
+    <string name="title_activity_editor">Kártya szerkesztés</string>
+    <string name="title_activity_details">Kártya részletek</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

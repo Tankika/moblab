@@ -5,7 +5,7 @@ import com.example.zizi.lab3.model.Card;
 
 public class GetEditableCardEvent {
     private int code;
-    private Object card;
+    private Card card;
     private Throwable throwable;
 
     public GetEditableCardEvent() {
@@ -19,11 +19,11 @@ public class GetEditableCardEvent {
         this.code = code;
     }
 
-    public Object getCard() {
+    public Card getCard() {
         return card;
     }
 
-    public void setCard(Object card) {
+    public void setCard(Card card) {
         this.card = card;
     }
 

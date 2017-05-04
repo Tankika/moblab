@@ -17,6 +17,8 @@ import de.greenrobot.event.EventBus;
 
 public class DetailsPresenter extends Presenter<DetailsScreen> {
 
+    private Card card;
+
     @Inject
     CardsInteractor cardsInteractor;
 
@@ -39,7 +41,9 @@ public class DetailsPresenter extends Presenter<DetailsScreen> {
         super.detachScreen();
     }
 
-    private Card card;
+    public Card getCard() {
+        return card;
+    }
 
     public void init(final long cardId) {
         executor.execute(new Runnable() {
@@ -62,7 +66,7 @@ public class DetailsPresenter extends Presenter<DetailsScreen> {
     }
 
     public void markCardFaveourite() {
-        card.setFavourite(false);
+        card.setFavourite(true);
 
         executor.execute(new Runnable() {
             @Override
@@ -90,6 +94,7 @@ public class DetailsPresenter extends Presenter<DetailsScreen> {
 
             screen.showMessage("error");
         } else {
+            this.card = event.getCard();
             screen.loadCard(event.getCard());
         }
     }
@@ -101,6 +106,7 @@ public class DetailsPresenter extends Presenter<DetailsScreen> {
 
             screen.showMessage("error");
         } else {
+            this.card = event.getCard();
             screen.loadCard(event.getCard());
         }
     }
