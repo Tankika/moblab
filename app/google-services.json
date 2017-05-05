@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "627117834122",
+    "project_id": "firebase-moblab"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627117834122:android:d7545dd32b78d8bf",
+        "android_client_info": {
+          "package_name": "com.example.zizi.lab3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF_SV1y61BxdNysF3EngSqIXTvF0Sn3a0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-98569207-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -21,6 +21,8 @@ import com.example.zizi.lab3.MobSoftApplication;
 import com.example.zizi.lab3.R;
 import com.example.zizi.lab3.model.Card;
 import com.example.zizi.lab3.ui.editor.EditorActivity;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 
@@ -29,6 +31,8 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity implements MainScreen, NavigationView.OnNavigationItemSelectedListener {
 
     CardListAdapter cardListAdapter;
+
+    private Tracker mTracker;
 
     @Inject
     MainPresenter mainPresenter;
@@ -58,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements MainScreen, Navig
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        MobSoftApplication application = (MobSoftApplication) getApplication();
+        mTracker = application.getDefaultTracker();
     }
 
     @Override
@@ -66,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements MainScreen, Navig
         mainPresenter.attachScreen(this);
 
         mainPresenter.getCards();
+
+        mTracker.setScreenName("Image~" + getClass().getName());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

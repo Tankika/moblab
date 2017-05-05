@@ -13,12 +13,16 @@ import android.widget.Toast;
 import com.example.zizi.lab3.MobSoftApplication;
 import com.example.zizi.lab3.R;
 import com.example.zizi.lab3.model.Card;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import javax.inject.Inject;
 
 public class EditorActivity extends AppCompatActivity implements EditorScreen {
 
     public final static String INTENT_EXTRA_CARD_ID = "INTENT_EXTRA_CARD_ID";
+
+    private Tracker mTracker;
 
     @Inject
     EditorPresenter editorPresenter;
@@ -31,6 +35,9 @@ public class EditorActivity extends AppCompatActivity implements EditorScreen {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        MobSoftApplication application = (MobSoftApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
         MobSoftApplication.injector.inject(this);
     }
@@ -45,6 +52,9 @@ public class EditorActivity extends AppCompatActivity implements EditorScreen {
         if(cardId != null) {
             editorPresenter.init(cardId);
         }
+
+        mTracker.setScreenName("Image~" + getClass().getName());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

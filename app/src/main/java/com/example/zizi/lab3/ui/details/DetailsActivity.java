@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.example.zizi.lab3.MobSoftApplication;
 import com.example.zizi.lab3.R;
 import com.example.zizi.lab3.model.Card;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
     public final static String INTENT_EXTRA_CARD_ID = "INTENT_EXTRA_CARD_ID";
 
     private Menu mOptionsMenu;
+
+    private Tracker mTracker;
 
     @Inject
     DetailsPresenter detailsPresenter;
@@ -55,6 +59,9 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
             }
         });
 
+        MobSoftApplication application = (MobSoftApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
         MobSoftApplication.injector.inject(this);
     }
 
@@ -66,6 +73,9 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
         Intent intent = getIntent();
         Long cardId = intent.getLongExtra(INTENT_EXTRA_CARD_ID, -1);
         detailsPresenter.init(cardId);
+
+        mTracker.setScreenName("Image~" + getClass().getName());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
